@@ -12,7 +12,7 @@ public class Write {
     public static void main(String[] args) {
         try {
             Configuration conf = new Configuration();
-            conf.set("fs.defaultFS", "hdfs://10.10.22.96:9000");
+            conf.set("fs.defaultFS", "hdfs://xqbs:9000");
             conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
 
 

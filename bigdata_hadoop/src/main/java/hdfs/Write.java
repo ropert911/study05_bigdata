@@ -1,4 +1,4 @@
-package com.xq.study.bigdata.hdfs;
+package hdfs;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;

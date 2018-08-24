@@ -1,10 +1,10 @@
 package com.xq.study.bigdata.hdfs;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
@@ -41,7 +41,7 @@ public class Read {
 
             System.out.println("===================用IOUtils.copyBytes读取");
             getIt.seek(0);
-            OutputStream outputStream = new ByteOutputStream(10240);
+            OutputStream outputStream = new ByteArrayOutputStream(10240);
             IOUtils.copyBytes(getIt, outputStream, conf, false);
             System.out.print(outputStream.toString());
             d.close(); //关闭文件

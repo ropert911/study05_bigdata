@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xq.study.bigdata.hadoop</groupId>
-    <artifactId>bigdata_hadoop</artifactId>
+    <artifactId>hadoop</artifactId>
     <version>1.0-SNAPSHOT</version>
     <parent>
         <groupId>com.xq.study.bigdata</groupId>

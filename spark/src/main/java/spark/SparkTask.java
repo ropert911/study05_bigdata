@@ -1,4 +1,4 @@
-package com.xq.study.bigdata.spark;
+package spark;
 
 import org.apache.spark.launcher.SparkAppHandle;
 import org.apache.spark.launcher.SparkLauncher;

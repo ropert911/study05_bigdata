@@ -5,7 +5,7 @@
 
 
     <groupId>com.xq.study.bigdata.spark</groupId>
-    <artifactId>bigdata_spark</artifactId>
+    <artifactId>spark</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -16,7 +16,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <name>bigdata_spark</name>
+    <name>spark</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -48,9 +48,6 @@
     </properties>
 
     <dependencies>
-
-
-
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-launcher_2.11</artifactId>

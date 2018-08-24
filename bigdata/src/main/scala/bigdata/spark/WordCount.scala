@@ -1,6 +1,6 @@
-package spark;
-import org.apache.spark.SparkContext
-import org.apache.spark.SparkConf
+package bigdata.spark
+
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * Created by sk-qianxiao on 2018/8/24.

@@ -17,6 +17,8 @@ import org.apache.hadoop.io.IOUtils;
 public class Read {
     public static void main(String[] args) {
         try {
+            System.setProperty("HADOOP_USER_NAME","root");
+
             Configuration conf = new Configuration();
             conf.set("fs.defaultFS", "hdfs://node1:9000");
             conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");

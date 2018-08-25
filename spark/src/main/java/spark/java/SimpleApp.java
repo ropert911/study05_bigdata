@@ -1,4 +1,4 @@
-package spark;
+package spark.java;
 
 import org.apache.spark.api.java.*;
 import org.apache.spark.api.java.function.Function;

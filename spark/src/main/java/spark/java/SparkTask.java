@@ -1,4 +1,4 @@
-package spark;
+package spark.java;
 
 import org.apache.spark.launcher.SparkAppHandle;
 import org.apache.spark.launcher.SparkLauncher;

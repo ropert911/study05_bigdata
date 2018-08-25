@@ -1,4 +1,4 @@
-package bigdata.spark
+package spark.scala
 
 /* SimpleApp.scala */
 import org.apache.spark.{SparkConf, SparkContext}

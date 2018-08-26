@@ -22,6 +22,8 @@ public class Read {
             Configuration conf = new Configuration();
             conf.set("fs.defaultFS", "hdfs://node1:9000");
             conf.set("fs.hdfs.impl", "org.apache.hadoop.hdfs.DistributedFileSystem");
+            //设置失败重试次数, 默认3次
+            conf.set("dfs.client.max.block.acquire.failures", "1");
 
             FileSystem fs = FileSystem.get(conf);
             Path file = new Path("/user/root/input/kms-acls.xml");
@@ -52,6 +54,5 @@ public class Read {
             e.printStackTrace();
         }
     }
-
 }
 

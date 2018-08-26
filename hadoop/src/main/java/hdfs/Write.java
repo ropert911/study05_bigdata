@@ -22,7 +22,10 @@ public class Write {
 
             String filename = "test"; //要写入的文件名
             FileSystem fs = FileSystem.get(conf);
-            FSDataOutputStream os = fs.create(new Path(filename));
+            Path path = new Path(filename);
+            FSDataOutputStream os = fs.create(path);
+            //客户端设置副本数，最小1个
+            fs.setReplication(path, (short)2);
             os.write(buff, 0, buff.length);
             System.out.println("Create:" + filename);
 

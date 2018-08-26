@@ -5,10 +5,12 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="true">
     <!--设备应用上下文,当多个应用共用日志比较有用-->
     <contextName>logback</contextName>
-    <!--引入资源文件-->
-    <property resource="application.properties"/>
+
     <!--自定义变量-->
     <property name="LOG_HOME" value="C://Users/sk-qianxiao/Desktop/log"/>
+
+    <!--引入资源文件-->
+    <property resource="application.properties"/>
 
     <!-- 输出到控制台 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
@@ -26,7 +28,7 @@
         <!-- 今日日志名称，当今日过后自动改为fileNamePattern的名称 -->
         <file>${LOG_HOME}/queue.log</file>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>INFO</level>
+            <level>WARN</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间 -->

@@ -8,6 +8,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object WordCount {
   def main(args: Array[String]) {
+    //这里默认就是hdfs的地址
     val inputFile =  "/user/root/input/hdfs-site.xml"
     val conf = new SparkConf().setAppName("WordCount").setMaster("local")
     val sc = new SparkContext(conf)

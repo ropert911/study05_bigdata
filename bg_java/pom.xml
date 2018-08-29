@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-
-    <groupId>com.xq.study.bigdata.spark</groupId>
-    <artifactId>spark</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>com.xq.study.bigdata.hadoop</groupId>
+    <artifactId>bg_java</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>spark</name>
-    <description>Demo project for Spring Boot</description>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -47,6 +51,20 @@
             <artifactId>logback-access</artifactId>
             <version>1.1.7</version>
         </dependency>
+
+        <!--  hadoop相关-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+
+
 
         <dependency>
             <groupId>org.apache.spark</groupId>
@@ -94,55 +112,53 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-
             <!-- scala 编译插件-->
+            <!--<plugin>-->
+            <!--<groupId>net.alchim31.maven</groupId>-->
+            <!--<artifactId>scala-maven-plugin</artifactId>-->
+            <!--<version>${scala-maven-plugin}</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--<goal>compile</goal>-->
+            <!--<goal>testCompile</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
+            <!--<configuration>-->
+            <!--<scalaCompatVersion>${scala.binary.version}</scalaCompatVersion>-->
+            <!--<scalaVersion>${scala.binary.version}</scalaVersion>-->
+            <!--<args>-->
+            <!--<arg>-deprecation</arg>-->
+            <!--<arg>-feature</arg>-->
+            <!--</args>-->
+            <!--</configuration>-->
+            <!--</plugin>-->
+
+            <!-- 打依赖包 -->
             <plugin>
-                <groupId>net.alchim31.maven</groupId>
-                <artifactId>scala-maven-plugin</artifactId>
-                <version>${scala-maven-plugin}</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.skspruce.ism.detect.spark.Test</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
                 <executions>
                     <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>compile</goal>
-                            <goal>testCompile</goal>
+                            <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
-                <configuration>
-                    <scalaCompatVersion>${scala.binary.version}</scalaCompatVersion>
-                    <scalaVersion>${scala.binary.version}</scalaVersion>
-                    <args>
-                        <arg>-deprecation</arg>
-                        <arg>-feature</arg>
-                    </args>
-                </configuration>
             </plugin>
-
-
-            <!-- 打依赖包 -->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-assembly-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<archive>-->
-                        <!--<manifest>-->
-                            <!--<mainClass>com.skspruce.ism.detect.spark.Test</mainClass>-->
-                        <!--</manifest>-->
-                    <!--</archive>-->
-                    <!--<descriptorRefs>-->
-                        <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
-                    <!--</descriptorRefs>-->
-                <!--</configuration>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>make-assembly</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>single</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 

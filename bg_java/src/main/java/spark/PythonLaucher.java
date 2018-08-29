@@ -1,4 +1,4 @@
-package spark.java;
+package spark;
 
 import org.apache.spark.launcher.SparkAppHandle;
 import org.apache.spark.launcher.SparkLauncher;
@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * @author sk-ziconglu on 2017/5/3.
  */
-public class SparkTask {
-    private final static Logger logger = LoggerFactory.getLogger(SparkTask.class);
+public class PythonLaucher {
+    private final static Logger logger = LoggerFactory.getLogger(PythonLaucher.class);
 
     public static void main(String[] args) {
         logger.info("begin to running task,task id is:");

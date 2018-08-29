@@ -9,8 +9,8 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>hadoop</module>
-        <module>spark</module>
+        <module>bg_java</module>
+        <module>bg_scala</module>
     </modules>
 
     <name>study13_bigdata</name>

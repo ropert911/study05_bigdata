@@ -1,4 +1,4 @@
-package spark.scala
+package spark
 
 /* SimpleApp.scala */
 import org.apache.spark.{SparkConf, SparkContext}

@@ -19,6 +19,7 @@ object File_WordCountStreaming  {
   }
 }
 
+//参考： http://dblab.xmu.edu.cn/blog/1385-2/
 //Spark Streaming每隔20秒就监听一次。
 // 但是，你这时会感到奇怪，既然启动监听了，为什么程序没有把我们刚才放置在”/usr/local/spark/mycode/streaming/logfile”
 // 目录下的log1.txt和log2.txt这两个文件中的内容读取出来呢？

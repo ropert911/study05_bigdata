@@ -3,7 +3,7 @@ package spark
 /* SimpleApp.scala */
 import org.apache.spark.{SparkConf, SparkContext}
 
-object SimpleApp {
+object File1 {
   def main(args: Array[String]) {
     val logFile = "file:///opt/spark-2.3.1-bin-hadoop2.7/README.md" // Should be some file on your system
     val conf = new SparkConf().setAppName("Simple Application")

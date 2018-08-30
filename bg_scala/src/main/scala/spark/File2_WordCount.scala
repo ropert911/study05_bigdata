@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  * Created by sk-qianxiao on 2018/8/24.
  */
 
-object WordCount {
+object File2_WordCount {
   def main(args: Array[String]) {
     //这里默认就是hdfs的地址
     val inputFile =  "/user/root/input/hdfs-site.xml"

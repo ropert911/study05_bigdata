@@ -1,10 +1,8 @@
-package spark.stream
+package spark.stream.kafka
 
 import java.util.HashMap
+
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
-import org.apache.spark.SparkConf
-import org.apache.spark.streaming._
-import org.apache.spark.streaming.kafka._
 
 object Kafka_WordProducer {
   def main(args: Array[String]) {

@@ -1,7 +1,7 @@
-package spark.stream
+package spark.util
 
-import org.apache.spark.internal.Logging
 import org.apache.log4j.{Level, Logger}
+import org.apache.spark.internal.Logging
 
 /** Utility functions for Spark Streaming examples. */
 object StreamingExamples extends Logging {

@@ -1,8 +1,7 @@
-package spark.stream
+package spark.stream.queue
 
 import org.apache.spark.SparkConf
 import org.apache.spark.rdd.RDD
-import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**

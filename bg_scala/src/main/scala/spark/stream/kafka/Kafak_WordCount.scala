@@ -1,11 +1,9 @@
-package spark.stream
+package spark.stream.kafka
 
-import org.apache.spark._
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming._
-import org.apache.spark.streaming.kafka._
-import org.apache.spark.streaming.StreamingContext._
 import org.apache.spark.streaming.kafka.KafkaUtils
+import spark.util.StreamingExamples
 
 object Kafak_WordCount {
   def main(args: Array[String]) {

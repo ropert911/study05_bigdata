@@ -1,4 +1,4 @@
-package spark.stream
+package spark.stream.filestream
 
 import org.apache.spark._
 import org.apache.spark.streaming._

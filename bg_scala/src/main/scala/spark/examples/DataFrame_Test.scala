@@ -16,6 +16,7 @@ object DataFrame_Test {
     df.select(df("name"), df("age") + 1).show() //select
     df.filter(df("age") > 20).show() //过滤
     df.groupBy("age").count().show() //分组计数
+    df.distinct().count()         //去重操作
     df.sort(df("age").desc).show() //按字段排序
     df.sort(df("age").desc, df("name").asc).show() //双字段排序
     df.select(df("name").as("username"), df("age")).show() //设置别名

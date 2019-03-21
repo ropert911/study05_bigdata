@@ -29,6 +29,9 @@ object RDD_Test {
     textFile.saveAsTextFile("file:///usr/local/spark/mycode/wordcount/writeback.txt") //另存为
 
     val pairRDD = textFile.flatMap(line => line.split(" ")).map(word => (word, 1))
+    pairRDD.partitionBy(new org.apache.spark.HashPartitioner(2))  //根据特定方式分区
+    pairRDD.repartition(4);   //重新分区
+
     pairRDD.groupByKey().foreach(println) //groupByKey：应用于(K,V)键值对的数据集时，返回一个新的(K, Iterable)形式的数据集
     pairRDD.reduceByKey((a, b) => a + b) //reduceByKey根据key做分组 review，参数是value
     pairRDD.sortByKey().foreach(println) //返回一个根据键排序的RDD

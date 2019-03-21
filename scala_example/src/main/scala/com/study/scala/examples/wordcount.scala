@@ -7,6 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
   */
 object wordcount {
   def main(args: Array[String]) {
+    System.setProperty("HADOOP_USER_NAME", "root")  //如果不设置，就默认就是sk-qianxiao，是没有权限的
     val conf = new SparkConf().setAppName("Simple Application").setMaster("local")
     val sc = new SparkContext(conf)
 
@@ -19,7 +20,7 @@ object wordcount {
     println("=================word count==============")
     val wordcount = rdd.flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _).map(x => (x._2, x._1)).sortByKey(false).map(x => (x._2, x._1))
     wordcount.foreach(println)
-//    wordcount.saveAsTextFile("hdfs://chavin.king:9000/user/hadoop/mapreduce/wordcount/output00000")
+    wordcount.saveAsTextFile("hdfs://192.168.20.101:8020/pyspark/script/default/result")
 
     sc.stop()
   }

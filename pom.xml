@@ -4,16 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.xq.study.bigdata</groupId>
-    <artifactId>study13_bigdata</artifactId>
+    <artifactId>study05_bigdata</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>bg_java</module>
         <module>bg_scala</module>
+        <module>scala_example</module>
     </modules>
 
-    <name>study13_bigdata</name>
+    <name>study05_bigdata</name>
 
 
     <properties>

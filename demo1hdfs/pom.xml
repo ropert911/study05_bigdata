@@ -8,10 +8,10 @@
         <version>2.1.9.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.xq.study.hbase</groupId>
-    <artifactId>hbase</artifactId>
+    <groupId>com.xq.study.demo1hdfs</groupId>
+    <artifactId>demo1hdfs</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hbase</name>
+    <name>demo1hdfs</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -29,10 +29,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--  hadoop相关-->
         <dependency>
-            <groupId>org.apache.hbase</groupId>
-            <artifactId>hbase-client</artifactId>
-            <version>1.2.0-cdh5.16.1</version>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-hdfs</artifactId>
+            <version>2.9.1</version>
         </dependency>
     </dependencies>
 

@@ -61,6 +61,14 @@ public interface HBaseUtils {
     boolean existTable(String tableName) throws Exception;
 
     /**
+     * enable表
+     *
+     * @param tableName
+     * @throws Exception
+     */
+    void enableTable(String tableName) throws Exception;
+
+    /**
      * disable表
      *
      * @param tableName
@@ -80,9 +88,10 @@ public interface HBaseUtils {
      * 修改表(增加和删除)
      *
      * @param tableName
+     * @param familys
      * @throws Exception
      */
-    void modifyTable(String tableName) throws Exception;
+    void modifyTable(String tableName, String[] familys) throws Exception;
 
     /**
      * 修改表(增加和删除)
@@ -94,6 +103,13 @@ public interface HBaseUtils {
      */
     void modifyTable(String tableName, String[] addColumn, String[] removeColumn) throws Exception;
 
+    /**
+     * 当列簇不存在时添加
+     *
+     * @param tableName
+     * @param hcds
+     * @throws Exception
+     */
     void modifyTable(String tableName, HColumnDescriptor hcds) throws Exception;
 
     /**
@@ -106,6 +122,16 @@ public interface HBaseUtils {
      */
     void putData(String tableName, String rowKey, String familyName, String columnName, String value) throws Exception;
 
+    /**
+     * 添加数据
+     * @param tableName
+     * @param rowKey
+     * @param familyName
+     * @param columnName
+     * @param value
+     * @param timestamp
+     * @throws Exception
+     */
     void putData(String tableName, String rowKey, String familyName, String columnName, String value, long timestamp) throws Exception;
 
     /**

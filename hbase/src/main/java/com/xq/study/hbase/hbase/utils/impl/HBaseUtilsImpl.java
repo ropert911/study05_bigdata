@@ -1,16 +1,14 @@
 package com.xq.study.hbase.hbase.utils.impl;
 
-import java.util.Date;
-import java.io.IOException;
-
-
 import com.xq.study.hbase.hbase.utils.HBaseUtils;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HBaseConfiguration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
-import org.apache.hadoop.conf.Configuration;
+
+import java.io.IOException;
 
 
 /**
@@ -146,6 +144,21 @@ public class HBaseUtilsImpl implements HBaseUtils {
     }
 
     @Override
+    public void enableTable(String tableName) throws Exception {
+        TableName name = TableName.valueOf(tableName);
+
+        if (admin.tableExists(name)) {
+            if (admin.isTableDisabled(name)) {
+                admin.enableTable(name);
+            } else {
+                System.out.println("table是活动状态");
+            }
+        } else {
+            System.out.println("table不存在");
+        }
+    }
+
+    @Override
     public void disableTable(String tableName) throws Exception {
         TableName name = TableName.valueOf(tableName);
 
@@ -188,7 +201,7 @@ public class HBaseUtilsImpl implements HBaseUtils {
     }
 
     @Override
-    public void modifyTable(String tableName) throws Exception {
+    public void modifyTable(String tableName, String[] familys) throws Exception {
         //转化为表名
         TableName name = TableName.valueOf(tableName);
         //判断表是否存在
@@ -202,12 +215,10 @@ public class HBaseUtilsImpl implements HBaseUtils {
             }
             //根据表名得到表
             HTableDescriptor tableDescriptor = admin.getTableDescriptor(name);
-            //创建列簇结构对象
-            HColumnDescriptor columnFamily1 = new HColumnDescriptor("cf1".getBytes());
-            HColumnDescriptor columnFamily2 = new HColumnDescriptor("cf2".getBytes());
+            for (String str : familys) {
+                tableDescriptor.addFamily(new HColumnDescriptor(str.getBytes()));
+            }
 
-            tableDescriptor.addFamily(columnFamily1);
-            tableDescriptor.addFamily(columnFamily2);
             //替换该表所有的列簇
             admin.modifyTable(name, tableDescriptor);
         } else {

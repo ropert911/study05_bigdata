@@ -1,4 +1,4 @@
-package com.xq.study.demo1hdfs.demo1hdfs;
+package com.xq.study.demo1hdfs.demo1hdfs.utils;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataInputStream;
@@ -23,7 +23,7 @@ public class HdfsUtilsImpl {
             FSDataOutputStream fos = fs.create(path);
 
             //客户端设置副本数，最小1个
-            fs.setReplication(path, (short) 1);
+//            fs.setReplication(path, (short) 1);
             fos.write(content.getBytes(), 0, content.length());
             fos.flush();
             fos.close();
@@ -50,7 +50,6 @@ public class HdfsUtilsImpl {
 
             FSDataInputStream getIt = fs.open(file);
 
-
             BufferedReader d = new BufferedReader(new InputStreamReader(getIt));
             String content = d.readLine();
             System.out.println("一行一行读取==============");
@@ -68,12 +67,36 @@ public class HdfsUtilsImpl {
 
             /**关闭文件*/
             d.close();
+            getIt.close();
+
             /**关闭hdfs*/
             fs.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public static void rmHdfsFile(String dhfsUrl, String filename) {
+        try {
+            Configuration conf = new Configuration();
+            HdfsUtilsImpl.configHdfs(conf, dhfsUrl);
+            FileSystem fs = FileSystem.get(conf);
+
+            Path file = new Path(filename);
+            //判断文件是否存在
+            if (!fs.exists(file)) {
+                System.out.println("文件不存在【" + filename + "】！！");
+                return;
+            }
+
+            fs.delete(file, false);
+            /**关闭hdfs*/
+            fs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void configHdfs(Configuration conf, String hdfsUrl) {
         //要以root方式登录，默认是本机用户名 sk-qianxiao， 权限不足

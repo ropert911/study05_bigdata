@@ -1,0 +1,9 @@
+启动命令：
+flume-ng agent --conf conf --conf-file demo.properties --name a1
+
+其中 a1 是配置文件中agent的名字
+
+本示例：
+    source：exec 是一个可执行命令
+    channel：memory 是内存方式的channel
+    sink：logger

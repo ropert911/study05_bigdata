@@ -1,0 +1,10 @@
+启动命令：
+flume-ng agent --conf conf --conf-file demo.properties --name a1
+
+使用：
+    flume-ng avro-client -H node1 -p 3721 -F /etc/profile 进行文件输入
+
+本示例：
+    source：spooldir  监测配置的目录下新增的文件，并将文件中的数据读取出来。其中，Spool Source有2个注意地方，第一个是拷贝到spool目录下的文件不可以再打开编辑，第二个是spool目录下不可包含相应的子目录。这个主要用途作为对日志的准实时监控。
+    channel：memory 是内存方式的channel
+    sink：logger 

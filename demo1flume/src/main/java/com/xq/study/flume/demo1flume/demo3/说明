@@ -1,0 +1,10 @@
+启动命令：
+flume-ng agent --conf conf --conf-file demo.properties --name a1
+
+使用：
+    flume-ng avro-client -H node1 -p 3721 -F /etc/profile 进行文件输入
+
+本示例：
+    source：avro  是flume内置的source的名称，配置里用的别名。不是类路径名称
+    channel：memory 是内存方式的channel
+    sink：logger 

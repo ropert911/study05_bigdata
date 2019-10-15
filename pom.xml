@@ -11,6 +11,9 @@
     <modules>
         <module>bg_java</module>
         <module>bg_scala</module>
+        <module>demo1flume</module>
+        <module>demo1hbase</module>
+        <module>demo1hive</module>
         <module>scala_example</module>
     </modules>
 

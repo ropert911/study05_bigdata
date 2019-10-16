@@ -32,6 +32,10 @@ public class HBaseUtilsImpl implements HBaseUtils {
         Configuration conf = HBaseConfiguration.create();
         // 设置当前的程序去寻找的hbase在哪里
         conf.set(ZK_CONNECT_KEY, zkConnectValue);
+        //另外的方式就是指定hdfs_core,hdfs_site,hbase_site配置文件
+//        conf.addResource("/etc/hbase/conf/core-site.xml");
+//        conf.addResource("/etc/hbase/conf/hdfs-site.xml");
+//        conf.addResource("/etc/hbase/conf/hbase-site.xml");
         try {
             conn = ConnectionFactory.createConnection(conf);
         } catch (IOException e) {

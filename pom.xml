@@ -13,8 +13,9 @@
         <module>bg_scala</module>
         <module>demo1flume</module>
         <module>demo1hbase</module>
+        <module>demo1hdfs</module>
         <module>demo1hive</module>
-        <module>scala_example</module>
+        <module>demo_spark</module>
     </modules>
 
     <name>study05_bigdata</name>
@@ -44,14 +45,14 @@
 
             <!-- java 编译插件-->
             <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<version>${maven-compiler-plugin.version}</version>-->
-                <!--<configuration>-->
-                    <!--<source>${java.version}</source>-->
-                    <!--<target>${java.version}</target>-->
-                    <!--<encoding>UTF-8</encoding>-->
-                <!--</configuration>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-compiler-plugin</artifactId>-->
+            <!--<version>${maven-compiler-plugin.version}</version>-->
+            <!--<configuration>-->
+            <!--<source>${java.version}</source>-->
+            <!--<target>${java.version}</target>-->
+            <!--<encoding>UTF-8</encoding>-->
+            <!--</configuration>-->
             <!--</plugin>-->
 
             <!-- scala 编译插件-->
@@ -79,17 +80,17 @@
 
             <!-- scala 另一个编译插件-->
             <!--<plugin>-->
-                <!--<groupId>org.scala-tools</groupId>-->
-                <!--<artifactId>maven-scala-plugin</artifactId>-->
-                <!--<version>2.15.2</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<goals>-->
-                            <!--<goal>compile</goal>-->
-                            <!--<goal>testCompile</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
+            <!--<groupId>org.scala-tools</groupId>-->
+            <!--<artifactId>maven-scala-plugin</artifactId>-->
+            <!--<version>2.15.2</version>-->
+            <!--<executions>-->
+            <!--<execution>-->
+            <!--<goals>-->
+            <!--<goal>compile</goal>-->
+            <!--<goal>testCompile</goal>-->
+            <!--</goals>-->
+            <!--</execution>-->
+            <!--</executions>-->
             <!--</plugin>-->
 
             <!-- 打依赖包 -->

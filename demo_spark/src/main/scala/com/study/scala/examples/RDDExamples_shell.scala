@@ -6,7 +6,7 @@ import org.apache.spark.broadcast.Broadcast
 import scala.util.parsing.json.JSON
 
 /**
-  * 这里的示例是spark-shell上运行过的示例
+  * 这里的示例大部分spark-shell有运行过，主要是参考
   *
   * @author xq
   * @data 2019/10/18

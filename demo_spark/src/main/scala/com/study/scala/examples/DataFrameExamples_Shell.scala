@@ -3,6 +3,8 @@ package com.study.scala.examples
 import org.apache.spark.sql.SparkSession
 
 /**
+  * 这里的示例大部分有运行过，主要是参考
+  *
   * @author sk-qianxiao
   * @date 2019/10/18
   */
@@ -177,7 +179,7 @@ object DataFrameExamples_Shell {
     jdbcDF.show()
   }
 
-  def hiveTest(): Unit ={
+  def hiveTest(): Unit = {
     case class Record(key: Int, value: String)
 
     // warehouseLocation points to the default location for managed databases and tables
@@ -189,14 +191,14 @@ object DataFrameExamples_Shell {
     import spark.sql
     //下面是运行结果
     sql("SELECT * FROM sparktest.student").show()
-/*
-+---+--------+------+---+
-| id| name|gender|age|
-+---+--------+------+---+
-| 1| Xueqian| F| 23|
-| 2|Weiliang| M| 24|
-+---+--------+------+---+
-*/
+    /*
+    +---+--------+------+---+
+    | id| name|gender|age|
+    +---+--------+------+---+
+    | 1| Xueqian| F| 23|
+    | 2|Weiliang| M| 24|
+    +---+--------+------+---+
+    */
 
 
     //##########写入数据
@@ -205,10 +207,10 @@ object DataFrameExamples_Shell {
     import org.apache.spark.sql.Row
 
     //下面我们设置两条数据表示两个学生信息
-    val studentRDD = spark.sparkContext.parallelize(Array("3 Rongcheng M 26","4 Guanhua M 27")).map(_.split(" "))
+    val studentRDD = spark.sparkContext.parallelize(Array("3 Rongcheng M 26", "4 Guanhua M 27")).map(_.split(" "))
 
     //下面要设置模式信息
-    val schema = StructType(List(StructField("id", IntegerType, true),StructField("name", StringType, true),StructField("gender", StringType, true),StructField("age", IntegerType, true)))
+    val schema = StructType(List(StructField("id", IntegerType, true), StructField("name", StringType, true), StructField("gender", StringType, true), StructField("age", IntegerType, true)))
 
     //下面创建Row对象，每个Row对象都是rowRDD中的一行
     val rowRDD = studentRDD.map(p => Row(p(0).toInt, p(1).trim, p(2).trim, p(3).toInt))

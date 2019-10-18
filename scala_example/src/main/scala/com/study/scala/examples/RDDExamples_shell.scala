@@ -11,7 +11,7 @@ import scala.util.parsing.json.JSON
   * @author xq
   * @data 2019/10/18
   **/
-object RDDExamples {
+object RDDExamples_shell {
   /**
     * 构建RDD操作
     *
@@ -134,23 +134,6 @@ object RDDExamples {
     //第二次行动操作，不需要触发从头到尾的计算，只需要重复使用上面缓存中的rdd
     println(rdd.collect().mkString(","))
     rdd.unpersist()
-  }
-
-  /**
-    * 缓存操作2
-    */
-  def cachedExample2(sc: SparkContext): Unit = {
-    //    val list = List("Hadoop", "Spark", "Hive")
-    //
-    //    val tableName = "tablenametmp"
-    //    rdd.toDF().createOrReplaceTempView(tableName)
-    //    //缓存 tmp table
-    //    spark.sqlContext.cacheTable(tableName)
-    //    //处理数据
-    //    handleData(spark, rdd, tableName)
-    //
-    //    //清除 tmp table 缓存
-    //    spark.sqlContext.uncacheTable(tableName)
   }
 
   /**

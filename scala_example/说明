@@ -1,0 +1,29 @@
+RDDExamples_shell
+    RDD的创建:文件，数组
+    一般操作
+        filter 过滤
+        first第一个
+        take 获取几个
+        map 映射
+        flatMap 扁平映射
+        reduce
+        groupByKey
+        reduceByKey
+        sortByKey
+        mapValues
+        collect  生成Array
+        动作：foreach，join
+    缓存操作
+    分区、重分区
+    进程内共享变量
+    累加器
+    saveAsTextFile 保存为txt文件
+    Json方式解析
+DataFrameExamples_Shell
+    test1: DataFrame常见操作
+    test2: DFrame 建视图，使用sql操作
+    test3: 读取txt,json 为DataFrame格式 保存为parquet 或 csv
+    test4: parquet格式读取
+    jdbcTest: jdbc读数据成DataFrom
+    hiveTest: 从hive中读取数据
+            RDD转Row; Row转自定义数据结构

@@ -11,7 +11,7 @@ import scala.util.parsing.json.JSON
   * @author xq
   * @data 2019/10/18
   **/
-object examples {
+object RDDExamples {
   /**
     * 构建RDD操作
     *

@@ -1,0 +1,87 @@
+./bin/spark-submit \
+  --class <main-class> \
+  --master <master-url> \
+  --deploy-mode <deploy-mode> \
+  --conf <key>=<value> \
+  ... # other options
+  <application-jar> \
+  [application-arguments]
+
+--master            表示要连接的集群管理器，spark://host:port, mesos://host:port, yarn, k8s://https://host:port, local
+--deploy-mode       client：选择在本地启动驱动器程序（Client和Driver两个角色都在同一个进程）
+                    cluster：Driver程序会被传输到集群中的一台工作节点机器(例如Yarn的NodeManager)上启动
+                    默认是client模式
+--class             指定应用程序的启动类（main方法），仅针对Java或Scala语言编写的应用
+--name              指定应用程序的名称
+--jars              指定需要上传并放到应用的CLASSPATH中的JAR包，多个jar包用逗号分隔
+--files             指定需要放到应用工作目录中的文件的列表。这个参数一般用来放需要分发到各节点的数据文件
+--packages          指定以逗号分隔的jar的maven坐标列表，包含在Driver和Executor类路径中。将搜索本地maven repo，然后搜索maven
+                    central以及--repositories给出的任何其他远程存储库。坐标的格式应为groupId：artifactId：version
+--exclude-packages  为了避免冲突而指定需要排除的某些package
+--repositories      指定以逗号分隔的远程repository列表，用来搜索--packages给出的maven坐标
+--py-files          指定需要添加到PYTHONPATH中的文件的列表。其中可以包含 .py、.egg以及.zip文件
+--conf              指定配置Spark应用的参数，格式为：PROP=VALUE
+--properties-file   指定要加载的配置文件，默认为./conf/spark-defaults.conf
+--driver-memory     指定Driver进程的堆内存大小，默认1024M
+--driver-java-options 指定启动Driver进程的额外参数
+--driver-library-path 指定传给Driver进程的额外的库路径
+--driver-class-path 指定传给Driver进程的额外的类路径
+--executor-memory   指定Executor进程的堆内存大小，默认1G
+--driver-cores      指定分配给Driver进程的CPU核数，--deploy-mode为cluster时有效
+--executor-cores    指定分配给每个Executor进程的CPU核数，--master为yarn或spark://host:port时有效
+--queue             指定任务的队列，仅仅--master为yarn时有效。默认default
+--num-executors     指定启动的Executor进程的个数，仅仅--master为yarn时有效。默认2
+
+ /opt/spark/bin/spark-submit \
+    --class com.skspruce.bigdata.bi.spark.streaming.DataParser \
+    --master yarn \
+    --deploy-mode cluster \
+    --num-executors 2 \
+    --executor-memory 2g \
+    --executor-cores 2 \
+    --driver-memory 1g \
+    --driver-cores 2 \
+    --conf spark.executor.memoryOverhead=1024m \
+    --conf spark.driver.memoryOverhead=1024m \
+    pm-etl-spark-1.0.0-jar-with-dependencies.jar --app-name=DataParser --bootstrap-servers=192.168.20.51:9092 --group-id=group_ETL --interval=300 --max-rate=20 --gpb-topic=pm_base --minute=15 --is-cluster=false --checkpoint-path=/spark/pm/checkpoint_0000 --ism-server=192.168.20.51 --ism-innerport=10015
+
+本地运行模式=======================
+./spark-submit \
+    --master local \
+    --class org.apache.spark.examples.SparkPi \
+    ../examples/jars/spark-examples_2.11-2.4.0.jar
+
+    local的形式有多种：
+    local：在本地启动一个工作线程来处理数据。
+    local[K]：在本地启动K个工作线程来并行处理数据。
+    local[K,F]：在本地启动K个工作线程来处理数据，并允许F次失败。
+    local[*]：根据本地服务器的CPU核数来启动工作线程，比如4核服务器，就启动4个工作线程。
+    local[*,F]：根据本地服务器的CPU核数来启动工作线程，并允许F次失败。比如4核服务器，就启动4个工作线程。
+
+standalone模式======================
+client模式========
+./spark-submit \
+--master spark://master-host:master-port \
+--deploy-mode client \
+--class org.apache.spark.examples.SparkPi \
+../examples/jars/spark-examples_2.11-2.4.0.jar
+cluster模式========
+./spark-submit \
+--master spark://master-host:master-port \
+--deploy-mode cluster \
+--class org.apache.spark.examples.SparkPi \
+../examples/jars/spark-examples_2.11-2.4.0.jar
+
+yarn模式===============================
+client模式=======
+./spark-submit \
+    --master yarn \
+    --deploy-mode client \
+    --class org.apache.spark.examples.SparkPi \
+    ../examples/jars/spark-examples_2.11-2.4.0.jar
+cluster模式========
+./spark-submit \
+    --master yarn \
+    --deploy-mode cluster \
+    --class org.apache.spark.examples.SparkPi \
+    ../examples/jars/spark-examples_2.11-2.4.0.jar

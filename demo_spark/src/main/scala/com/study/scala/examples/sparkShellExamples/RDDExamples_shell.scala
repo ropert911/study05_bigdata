@@ -1,4 +1,4 @@
-package com.study.scala.examples
+package com.study.scala.examples.sparkShellExamples
 
 import org.apache.spark.SparkContext
 import org.apache.spark.broadcast.Broadcast

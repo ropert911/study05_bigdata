@@ -15,7 +15,6 @@
         <module>demo1hbase</module>
         <module>demo1hdfs</module>
         <module>demo1hive</module>
-        <module>demo_spark</module>
     </modules>
 
     <name>study05_bigdata</name>

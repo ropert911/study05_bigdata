@@ -1,4 +1,4 @@
-package com.study.scala.examples
+package com.study.scala.examples.sparkShellExamples
 
 import org.apache.spark.sql.SparkSession
 
@@ -9,6 +9,10 @@ import org.apache.spark.sql.SparkSession
   * @date 2019/10/18
   */
 object DataFrameExamples_Shell {
+
+  //只有吧定义放到方法外，toDF才能编译生效
+  case class Person(name: String, age: Long)
+
   def test1(): Unit = {
     val spark = SparkSession.builder().getOrCreate()
     //读取json格式数据
@@ -104,19 +108,18 @@ object DataFrameExamples_Shell {
     */
   }
 
+
   /**
     * Datafram缓存，技术sql等
     */
   def test2(): Unit = {
-    case class Person(name: String, age: Long)
-
     val filepath = "file:///opt/spark-2.3.4-bin-hadoop2.7/examples/src/main/resources/people.txt"
     val spark = SparkSession.builder().getOrCreate()
 
     //导入包，支持把一个RDD隐式转换为一个DataFrame,要不toDF要失败
     import spark.implicits._
-    val peopleDF = spark.sparkContext.textFile(filepath).map(_.split(",")).map(attributes => Person(attributes(0), attributes(1).trim.toInt)).toDF()
-
+    val peopleDF1 = spark.sparkContext.textFile(filepath).map(_.split(",")).map(attributes => Person(attributes(0), attributes(1).trim.toInt)).toDF()
+    val peopleDF = spark.read.format("json").load("file:///opt/spark-2.3.4-bin-hadoop2.7/examples/src/main/resources/people.json")
     //DataFrame的监听视图，方便做sql操作
     peopleDF.createOrReplaceTempView("people")
     //这里不做持久化也只是，只是为了方便多次action，一般都要挂念化
@@ -133,8 +136,6 @@ object DataFrameExamples_Shell {
     * 不同的格式
     */
   def test3(): Unit = {
-    case class Person(name: String, age: Long)
-
     //以tex方式加载
     val filepath = "file:///opt/spark-2.3.4-bin-hadoop2.7/examples/src/main/resources/people.txt"
     val spark = SparkSession.builder().getOrCreate()
@@ -144,8 +145,6 @@ object DataFrameExamples_Shell {
     //以json格式加载 出来的结果可能是 DataFrame = [age: bigint, name: string]
     val peopleDF2 = spark.read.format("json").load("file:///opt/spark-2.3.4-bin-hadoop2.7/examples/src/main/resources/people.json")
     val peopleDF3 = spark.read.json("file:///opt/spark-2.3.4-bin-hadoop2.7/examples/src/main/resources/people.json")
-
-
 
 
     //读取部分字段，以csv格式保存
@@ -187,7 +186,6 @@ object DataFrameExamples_Shell {
 
     val spark = SparkSession.builder().appName("Spark Hive Example").config("spark.sql.warehouse.dir", warehouseLocation).enableHiveSupport().getOrCreate()
 
-    import spark.implicits._
     import spark.sql
     //下面是运行结果
     sql("SELECT * FROM sparktest.student").show()
@@ -202,9 +200,8 @@ object DataFrameExamples_Shell {
 
 
     //##########写入数据
-    import java.util.Properties
-    import org.apache.spark.sql.types._
     import org.apache.spark.sql.Row
+    import org.apache.spark.sql.types._
 
     //下面我们设置两条数据表示两个学生信息
     val studentRDD = spark.sparkContext.parallelize(Array("3 Rongcheng M 26", "4 Guanhua M 27")).map(_.split(" "))

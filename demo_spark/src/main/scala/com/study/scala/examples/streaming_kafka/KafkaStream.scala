@@ -6,7 +6,9 @@ import org.apache.kafka.common.serialization.BytesDeserializer
 import org.apache.kafka.common.utils.Bytes
 import org.apache.spark.SparkConf
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.streaming.kafka.KafkaUtils
+import org.apache.spark.streaming.kafka010.ConsumerStrategies.Subscribe
+import org.apache.spark.streaming.kafka010.KafkaUtils
+import org.apache.spark.streaming.kafka010.LocationStrategies.PreferConsistent
 import org.apache.spark.streaming.{Seconds, StreamingContext}
 
 /**
@@ -22,8 +24,8 @@ object KafkaStream {
 
     //获取参数列表
     val appName = cmd.getOptionValue("app-name", this.getClass.getSimpleName).trim
-    val kafkaBootstrapServers = cmd.getOptionValue("bootstrap-servers", "localhost:9092").trim  //kafka地址
-    val kafkaListenGroupId = cmd.getOptionValue("group-id", "fire_safe_data_monitor").trim      //kafka监听时的 group
+    val kafkaBootstrapServers = cmd.getOptionValue("bootstrap-servers", "localhost:9092").trim //kafka地址
+    val kafkaListenGroupId = cmd.getOptionValue("group-id", "fire_safe_data_monitor").trim //kafka监听时的 group
     val interval = cmd.getOptionValue("interval", "300").trim
     val topics = cmd.getOptionValue("topics", "itc-flume-hdfs-channel").trim
     val maxRatePerPartition = cmd.getOptionValue("max-rate", "2000").trim

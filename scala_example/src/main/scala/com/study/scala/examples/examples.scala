@@ -3,6 +3,8 @@ package com.study.scala.examples
 import org.apache.spark.SparkContext
 
 /**
+  * 这里的示例是spark-shell上运行过的示例
+  *
   * @author xq
   * @data 2019/10/18
   **/

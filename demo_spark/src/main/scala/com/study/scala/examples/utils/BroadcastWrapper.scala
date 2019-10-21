@@ -1,9 +1,11 @@
-package spark.util
+package com.study.scala.examples.utils
+
+import java.util
 
 import org.apache.spark.SparkContext
 import org.apache.spark.broadcast.Broadcast
 import org.slf4j.LoggerFactory
-import java.util
+
 import scala.collection.immutable.Map
 
 /**

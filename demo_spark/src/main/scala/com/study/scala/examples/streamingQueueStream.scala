@@ -1,4 +1,4 @@
-package spark.stream.queue
+package com.study.scala.examples
 
 import org.apache.spark.SparkConf
 import org.apache.spark.rdd.RDD
@@ -7,7 +7,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 /**
   * Created by sk-qianxiao on 2018/8/30.
   */
-object QueueStream {
+object streamingQueueStream {
   def main(args: Array[String]) {
     val sparkConf = new SparkConf().setAppName("TestRDDQueue").setMaster("local[2]")
 

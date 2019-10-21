@@ -1,36 +1,23 @@
-RDDExamples_shell
-    RDD的创建:文件，数组
-    一般操作
-        filter 过滤
-        first第一个
-        take 获取几个
-        map 映射
-        flatMap 扁平映射
-        reduce
-        groupByKey
-        reduceByKey
-        sortByKey
-        mapValues
-        collect  生成Array
-        动作：foreach，join
-    缓存操作
-    分区、重分区
-    进程内共享变量
-    累加器
-    saveAsTextFile 保存为txt文件
-    Json方式解析
-DataFrameExamples_Shell
-    test1: DataFrame常见操作
-    test2: DFrame 建视图，使用sql操作
-    test3: 读取txt,json 为DataFrame格式 保存为parquet 或 csv
-    test4: parquet格式读取
-    jdbcTest: jdbc读数据成DataFrom
-    hiveTest: 从hive中读取数据
-            RDD转Row; Row转自定义数据结构
-
-streaming_tcp: DataStream示例，不可运行，只做开发参考
-    从tcp连接到服务器word，统计并保存结果
-
+sparkShellExamples
+    DataFrame_FileFormat    读取不同的文件格式，保存为不同的文件格式
+    DataFrame_Hive          Hive操作
+    DataFrame_JDBC_Mysql        jdbc_mysql的读取和写入
+    DataFrameExamples_Shell
+        test1: DataFrame常见操作
+        test2: DFrame 建视图，使用sql操作
+        rddToDataFrame\rddToDataFrame2 : RDD转DataFrame
+    RDDExamples_shell
+        RDD的创建:文件，数组
+        一般操作
+            filter 过滤   first第一个   take 获取几个
+            map 映射  flatMap 扁平映射
+            reduce  groupByKey  reduceByKey
+            sortByKey  mapValues   collect  生成Array
+            动作：foreach，join
+        缓存操作    分区、重分区      进程内共享变量
+        累加器
+        saveAsTextFile 保存为txt文件
+        Json方式解析
 streaming_kafka: kafka监听处理示例，不可运行，只做开发参考
     /opt/spark/bin/spark-submit \
     --class com.skspruce.bigdata.bi.spark.streaming.DataParser \
@@ -44,8 +31,12 @@ streaming_kafka: kafka监听处理示例，不可运行，只做开发参考
     --conf spark.executor.memoryOverhead=1024m \
     --conf spark.driver.memoryOverhead=1024m \
     pm-etl-spark-1.0.0-jar-with-dependencies.jar --app-name=DataParser --bootstrap-servers=192.168.20.51:9092 --group-id=group_ETL --interval=300 --max-rate=20 --gpb-topic=pm_base --minute=15 --is-cluster=false --checkpoint-path=/spark/pm/checkpoint_0000 --ism-server=192.168.20.51 --ism-innerport=10015
+utils:
+    BroadcastWrapper 不同阶段共享变量
 
-
+batchDFFromMysql     读mysql 表形成DataFrame
 batchFileWordCount  文件统计单词数量的示例
-batchDFFromMysql     读mysql 表形成DataFram
+streamFileStream      监听文件系统
+streamingQueueStream    监听collection队列
 streamingTcpWordCount  tcp的stream
+

@@ -1,9 +1,13 @@
-package spark.stream.kafka
+package com.study.scala.examples.streaming_kafka
 
 import java.util.HashMap
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 
+/**
+  * @author sk-qianxiao
+  * @date 2019/10/21
+  */
 object Kafka_WordProducer {
   def main(args: Array[String]) {
     if (args.length < 4) {

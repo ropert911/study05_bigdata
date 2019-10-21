@@ -1,4 +1,4 @@
-package spark.examples
+package com.study.scala.examples.sparkShellExamples
 
 import java.util.Properties
 
@@ -9,7 +9,7 @@ import org.apache.spark.sql.{Row, SparkSession}
   * Created by sk-qianxiao on 2018/8/24.
   */
 
-object JDBC_Test {
+object DataFrame_JDBC_Mysql {
   def main(args: Array[String]) {
     val spark = SparkSession.builder().getOrCreate()
 

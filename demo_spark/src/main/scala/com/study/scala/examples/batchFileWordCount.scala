@@ -1,21 +1,23 @@
 package com.study.scala.examples
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.{SparkConf, SparkContext}
 
 /**
-  * Created by sk-qianxiao on 2019/3/21.
+  * 示例：修改文件单词个数
+  *
+  * @author sk-qianxiao
+  * @date 2019/3/21
   */
 object batchFileWordCount {
   def main(args: Array[String]) {
-    //hadoop用到的:如果不设置，就默认就是sk-qianxiao，没有权限的
-    //    System.setProperty("HADOOP_USER_NAME", "hdfs")
-    //spark用到的
-    //    System.setProperty("user.name", "hdfs")
+    //hadoop用户，这里默认是零
+    println("HADOOP_USER_NAME==" + System.getProperty("HADOOP_USER_NAME"))
+    //spark用户名，在linux平台上执行和执行用户是一致的
+    println("user.name==" + System.getProperty("user.name"))
+
 
     val spark = SparkSession.builder().appName("batchFileWordCount_AppName").getOrCreate()
     val sc = spark.sparkContext
-
 
     val logFile = "hdfs://node1:9000/profile"
     val rdd = sc.textFile(logFile)

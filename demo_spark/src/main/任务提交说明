@@ -8,6 +8,7 @@
   [application-arguments]
 
 --master            表示要连接的集群管理器，spark://host:port, mesos://host:port, yarn, k8s://https://host:port, local
+                    如果没有指定，默认就是 local[*]
 --deploy-mode       client：选择在本地启动驱动器程序（Client和Driver两个角色都在同一个进程）
                     cluster：Driver程序会被传输到集群中的一台工作节点机器(例如Yarn的NodeManager)上启动
                     默认是client模式
@@ -55,33 +56,21 @@
     local：在本地启动一个工作线程来处理数据。
     local[K]：在本地启动K个工作线程来并行处理数据。
     local[K,F]：在本地启动K个工作线程来处理数据，并允许F次失败。
-    local[*]：根据本地服务器的CPU核数来启动工作线程，比如4核服务器，就启动4个工作线程。
+    local[*]：根据本地服务器的CPU核数来启动工作线程，比如4核服务器，就启动4个工作线程。    默认设置。
     local[*,F]：根据本地服务器的CPU核数来启动工作线程，并允许F次失败。比如4核服务器，就启动4个工作线程。
 
-standalone模式======================
-client模式========
-./spark-submit \
---master spark://master-host:master-port \
---deploy-mode client \
---class org.apache.spark.examples.SparkPi \
-../examples/jars/spark-examples_2.11-2.4.0.jar
-cluster模式========
-./spark-submit \
---master spark://master-host:master-port \
---deploy-mode cluster \
---class org.apache.spark.examples.SparkPi \
-../examples/jars/spark-examples_2.11-2.4.0.jar
 
-yarn模式===============================
-client模式=======
-./spark-submit \
-    --master yarn \
-    --deploy-mode client \
-    --class org.apache.spark.examples.SparkPi \
-    ../examples/jars/spark-examples_2.11-2.4.0.jar
-cluster模式========
-./spark-submit \
-    --master yarn \
-    --deploy-mode cluster \
-    --class org.apache.spark.examples.SparkPi \
-    ../examples/jars/spark-examples_2.11-2.4.0.jar
+local[*] 方式 ：根据cpu个数确认执行器
+spark-submit --class com.study.scala.examples.batchFileWordCount ./demo_spark-1.0-SNAPSHOT-jar-with-dependencies.jar
+local：只一个线程
+spark-submit --master local --class com.study.scala.examples.batchFileWordCount ./demo_spark-1.0-SNAPSHOT-jar-with-dependencies.jar
+
+standalone-client模式
+spark-submit --master spark://node1:7077 --deploy-mode client  --class com.study.scala.examples.batchFileWordCount ./demo_spark-1.0-SNAPSHOT-jar-with-dependencies_nopartition.jar
+standalone-cluster模式 用的是rest接口
+spark-submit --master spark://node1:6066 --deploy-mode cluster  --class com.study.scala.examples.batchFileWordCount /root/demo_spark-1.0-SNAPSHOT-jar-with-dependencies_nopartition.jar
+
+yarn-client模式
+spark-submit --master yarn --deploy-mode client  --class com.study.scala.examples.batchFileWordCount ./demo_spark-1.0-SNAPSHOT-jar-with-dependencies_nopartition.jar
+yarn-cluster模式
+spark-submit --master yarn --deploy-mode cluster  --class com.study.scala.examples.batchFileWordCount ./demo_spark-1.0-SNAPSHOT-jar-with-dependencies_nopartition.jar

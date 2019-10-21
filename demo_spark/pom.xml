@@ -20,12 +20,14 @@
         <java.version>1.8</java.version>
 
         <kafka-client.version>2.3.0</kafka-client.version>
-        <spark.version>2.4.4</spark.version>
-        <scala.version>2.12</scala.version>
+        <!--这里的spark版本和实际安装的保持一致-->
+        <spark.version>2.3.4</spark.version>
+        <!--这里一般对应的spark库所用到的scala版本，要不然会报库找不到-->
+        <scala.version>2.11</scala.version>
+        <scala.binary.version>2.11</scala.binary.version>
 
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <scala-maven-plugin>3.2.2</scala-maven-plugin>
-        <scala.binary.version>2.12</scala.binary.version>
     </properties>
 
     <dependencies>
@@ -44,9 +46,10 @@
             <artifactId>spark-streaming_${scala.version}</artifactId>
             <version>${spark.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10 -->
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
+            <artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>
             <version>${spark.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-clients -->

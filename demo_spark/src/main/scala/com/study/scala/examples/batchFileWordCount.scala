@@ -3,7 +3,7 @@ package com.study.scala.examples
 import org.apache.spark.sql.SparkSession
 
 /**
-  * 示例：修改文件单词个数
+  * 示例：统计文件单词个数
   *
   * @author sk-qianxiao
   * @date 2019/3/21

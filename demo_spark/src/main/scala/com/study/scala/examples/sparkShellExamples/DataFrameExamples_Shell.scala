@@ -176,6 +176,9 @@ object DataFrameExamples_Shell {
       .option("dbtable", "student") //加载的表
       .load()
     jdbcDF.show()
+
+    //保存到hive中
+    jdbcDF.write.mode("overwrite").saveAsTable("testwarehouse.testtt")
   }
 
   def hiveTest(): Unit = {

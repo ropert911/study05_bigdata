@@ -21,6 +21,10 @@ object DataFrame_FileFormat {
     //以json格式加载 出来的结果可能是 DataFrame = [age: bigint, name: string]
     val peopleDF2 = spark.read.format("json").load("file:///opt/spark-2.3.4-bin-hadoop2.7/examples/src/main/resources/people.json")
     val peopleDF3 = spark.read.json("file:///opt/spark-2.3.4-bin-hadoop2.7/examples/src/main/resources/people.json")
+
+    // 心libsvm格式加载
+    val dataset = spark.read.format("libsvm").load("C:\\Users\\sk-qianxiao\\Desktop\\data\\sample_kmeans_data.txt")
+
   }
 
   /**
@@ -34,7 +38,7 @@ object DataFrame_FileFormat {
     namesDF.foreach(attributes => println("Name: " + attributes(0) + " favorite color:" + attributes(1)))
   }
 
-  def save(): Unit ={
+  def save(): Unit = {
     val spark = SparkSession.builder().getOrCreate()
     val df = spark.read.json("file:///opt/spark-2.3.4-bin-hadoop2.7/examples/src/main/resources/people.json")
 

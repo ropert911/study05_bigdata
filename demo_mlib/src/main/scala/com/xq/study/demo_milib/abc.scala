@@ -1,7 +1,5 @@
 package com.xq.study.demo_milib
 
-import com.xq.study.demo_milib.KMeansTest.do1
-import org.apache.spark.SparkContext
 import org.apache.spark.sql.SparkSession
 
 /**

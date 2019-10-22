@@ -6,6 +6,7 @@ sparkShellExamples
         test1: DataFrame常见操作
         test2: DFrame 建视图，使用sql操作
         rddToDataFrame\rddToDataFrame2 : RDD转DataFrame
+    RDD_shell       构建RDD
     RDDExamples_shell
         RDD的创建:文件，数组
         一般操作

@@ -8,9 +8,6 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author sk-ziconglu on 2017/5/3.
- */
 public class PythonLaucher {
     private final static Logger logger = LoggerFactory.getLogger(PythonLaucher.class);
 

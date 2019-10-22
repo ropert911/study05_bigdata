@@ -6,7 +6,7 @@ import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.sql.SparkSession
 
 /**
-  * 示例：K-means 聚类分析,使用欧式距离公司计算距离
+  * 示例：K-means 聚类分析,使用欧式距离公式计算距离
   *
   * @author sk-qianxiao
   * @date 2019/3/21

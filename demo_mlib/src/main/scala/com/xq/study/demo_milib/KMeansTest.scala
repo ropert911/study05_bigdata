@@ -3,9 +3,11 @@ package com.xq.study.demo_milib
 import java.util.Random
 
 import org.apache.spark.SparkContext
-import org.apache.spark.mllib.linalg.Vectors
+import org.apache.spark.mllib.linalg.{Matrix, Vector, Vectors}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.mllib.clustering.KMeans
+import org.apache.spark.mllib.stat.Statistics
+import org.apache.spark.rdd.RDD
 
 import scala.collection.mutable.ListBuffer
 
@@ -83,11 +85,12 @@ object KMeansTest {
       println(index + "\t" + centers(index))
     }
 
+
     //判定新数据是不是合理
-    //    println(clusters.predict(Vectors.dense(Array(/*8.5,*/ 35.2, 20))))
-    //    println(clusters.predict(Vectors.dense(Array(/*6.5,*/ 16.7, 10))))
-    //    println(clusters.predict(Vectors.dense(Array(/*26.5,*/ 49.6, 26))))
-    //    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 7))))
+    println(clusters.predict(Vectors.dense(Array(/*8.5,*/ 35.2, 20))))
+    println(clusters.predict(Vectors.dense(Array(/*6.5,*/ 16.7, 10))))
+    println(clusters.predict(Vectors.dense(Array(/*26.5,*/ 49.6, 26))))
+    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 7))))
 
     parseData.unpersist()
   }

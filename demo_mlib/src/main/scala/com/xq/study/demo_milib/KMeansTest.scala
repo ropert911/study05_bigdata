@@ -91,6 +91,7 @@ object KMeansTest {
     println(clusters.predict(Vectors.dense(Array(/*6.5,*/ 16.7, 10))))
     println(clusters.predict(Vectors.dense(Array(/*26.5,*/ 49.6, 26))))
     println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 7))))
+    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 100))))
 
     parseData.unpersist()
   }

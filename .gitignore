@@ -16,3 +16,4 @@ logs/
 # python
 *.pyc
 __pycache__
+/spark-warehouse/

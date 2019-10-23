@@ -31,6 +31,8 @@ object abc {
 
     // Make predictions
     val predictions = model.transform(dataset)
+    val a = predictions.rdd
+    a.foreach(println)
 
     // Evaluate clustering by computing Silhouette score
     val evaluator = new ClusteringEvaluator()

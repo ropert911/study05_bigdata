@@ -15,7 +15,7 @@ object algorithm {
     val spark = SparkSession.builder().appName(KMeansTest.getClass.getName).master("local[1]").getOrCreate()
     val sc = spark.sparkContext
 
-//    summarystatisticsTest(sc)
+    //    summarystatisticsTest(sc)
     relationTest(sc)
   }
 
@@ -40,7 +40,7 @@ object algorithm {
   }
 
   /**
-    * 相关性计算
+    * 相关性计算Pearson:评估定距变量间的线性相关关系，如年龄和身高；水深和水压
     *
     * @param sc
     */
@@ -49,29 +49,27 @@ object algorithm {
     import org.apache.spark.mllib.stat.Statistics
     import org.apache.spark.rdd.RDD
     {
-      val seriesX: RDD[Double] = sc.parallelize(Array(1, 2, 3, 3, 5))
+      val seriesX: RDD[Double] = sc.parallelize(Array(1, 10, 100))
       // a series must have the same number of partitions and cardinality as seriesX
-      val seriesY: RDD[Double] = sc.parallelize(Array(11, 22, 33, 33, 55))
+      val seriesY: RDD[Double] = sc.parallelize(Array(2.0, 20.0, 200))
 
       // 使用Pearson方法计算相关性。输入"spearman"作为Spearman的方法。如果未指定方法，则默认使用Pearson方法。
       val correlation: Double = Statistics.corr(seriesX, seriesY, "pearson")
       println(s"Correlation is: $correlation")
     }
 
-    {
-      val data: RDD[Vector] = sc.parallelize(
-        Seq(
-          Vectors.dense(1.0, 10.0, 100.0),
-          Vectors.dense(2.0, 20.0, 200.0),
-          Vectors.dense(3.0, 30.0, 300.0),
-          Vectors.dense(4.0, 60.0, 500.0))
+        {
+          val data: RDD[Vector] = sc.parallelize(
+            Seq(
+              Vectors.dense(1.0, 10.0, 100.0),
+              Vectors.dense(2.0, 20.0, 800.0))
 
-      ) // note that each Vector is a row and not a column
-      data.foreach(println)
+          ) // note that each Vector is a row and not a column
+          data.foreach(println)
 
-      // 使用Pearson方法计算相关性。输入"spearman"作为Spearman的方法。如果未指定方法，则默认使用Pearson方法。
-      val correlMatrix: Matrix = Statistics.corr(data, "pearson")
-      println(correlMatrix.toString)
-    }
+          // 使用Pearson方法计算相关性。输入"spearman"作为Spearman的方法。如果未指定方法，则默认使用Pearson方法。
+          val corrMatrix: Matrix = Statistics.corr(data, "pearson")
+          println(corrMatrix.toString)
+        }
   }
 }

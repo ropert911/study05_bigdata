@@ -6,7 +6,7 @@ import org.apache.spark.sql.SparkSession
   * @author sk-qianxiao
   * @date 2019/10/22
   */
-object abc {
+object KMeasTestMl {
   def main(args: Array[String]): Unit = {
     //设置spark参数
     val spark = SparkSession.builder().appName(KMeansTest.getClass.getName).master("local[1]").getOrCreate()

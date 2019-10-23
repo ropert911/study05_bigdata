@@ -65,14 +65,10 @@ object KMeansTest {
 
     //形成训练数据模型
     val numClusters = 5 //分类数
-    val numIterations = 50  //迭代次数
+    val numIterations = 50 //迭代次数
     val clusters = KMeans.train(parseData, numClusters, numIterations)
 
-    //显示数据模型的中间点
-    val centers = clusters.clusterCenters.toList
-    for (index <- 0 until centers.size) {
-      println(index + "\t" + centers(index))
-    }
+
     //所有点到中心点的距离的 平方和，一般来说越小越好，但这又有分类数形成一定的冲突
     val wssse = clusters.computeCost(parseData)
     println(s"与中心点的距离平方和 = $wssse")
@@ -81,11 +77,17 @@ object KMeansTest {
     //做map开始是为了做计数统计
     clusters.predict(parseData).map(cluster => (cluster, 1)).reduceByKey(_ + _).collect().foreach(println _)
 
+    println("显示数据模型的中间点==")
+    val centers = clusters.clusterCenters.toList
+    for (index <- 0 until centers.size) {
+      println(index + "\t" + centers(index))
+    }
+
     //判定新数据是不是合理
-    println(clusters.predict(Vectors.dense(Array(/*8.5,*/ 35.2, 20))))
-    println(clusters.predict(Vectors.dense(Array(/*6.5,*/ 16.7, 10))))
-    println(clusters.predict(Vectors.dense(Array(/*26.5,*/ 49.6, 26))))
-    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 7))))
+    //    println(clusters.predict(Vectors.dense(Array(/*8.5,*/ 35.2, 20))))
+    //    println(clusters.predict(Vectors.dense(Array(/*6.5,*/ 16.7, 10))))
+    //    println(clusters.predict(Vectors.dense(Array(/*26.5,*/ 49.6, 26))))
+    //    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 7))))
 
     parseData.unpersist()
   }

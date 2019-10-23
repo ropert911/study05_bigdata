@@ -1,14 +1,23 @@
 package com.xq.study.demo_milib
 
+import com.xq.study.demo_milib.Vector_Test.MatrixTest
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.stat.{MultivariateStatisticalSummary, Statistics}
+import org.apache.spark.sql.SparkSession
 
 /**
   * @author sk-qianxiao
   * @date 2019/10/23
   */
 object algorithm {
+  def main(args: Array[String]) {
+    val spark = SparkSession.builder().appName(KMeansTest.getClass.getName).master("local[1]").getOrCreate()
+    val sc = spark.sparkContext
+
+    summarystatisticsTest(sc)
+  }
+
   /**
     * 矩阵的统计值：列平均，列方差
     */
@@ -24,7 +33,7 @@ object algorithm {
     // Compute column summary statistics.
     val summary: MultivariateStatisticalSummary = Statistics.colStats(observations)
     println(summary.mean) //每列平均值
-    //列方差  方差等于各个数据与其算术平均数的离差平方和的平均数
+    //列方差  方差等于各个数据与其算术平均数的离差平方和的平均数(平均时个数要减1)
     println(summary.variance)
     println(summary.numNonzeros) // 每列中的非零个数 number of nonzeros in each column
   }

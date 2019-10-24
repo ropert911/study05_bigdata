@@ -15,8 +15,8 @@ object algorithm {
     val spark = SparkSession.builder().appName(KMeansTest.getClass.getName).master("local[1]").getOrCreate()
     val sc = spark.sparkContext
 
-    summarystatisticsTest(sc)
-    //    relationTest(sc)
+    //    summarystatisticsTest(sc)
+    relationTest(sc)
   }
 
   /**
@@ -68,13 +68,15 @@ object algorithm {
     {
       val data: RDD[Vector] = sc.parallelize(
         Seq(
-          Vectors.dense(1.0, 10.0, 100.0),
-          Vectors.dense(2.0, 20.0, 800.0))
+          Vectors.dense(1.0, 10.0, 100.0, 300),
+          Vectors.dense(2.0, 20.0, 200.0, 400),
+          Vectors.dense(3.0, 20.0, 200.0, 400))
 
       ) // note that each Vector is a row and not a column
       data.foreach(println)
 
-      // 使用Pearson方法计算相关性。输入"spearman"作为Spearman的方法。如果未指定方法，则默认使用Pearson方法。
+      // 使用Pearson方法计算相关性。输入"spearman"作为Spearman的方法。如果未指定方法，则默认使用Pearson方法
+      //计算相关矩阵，相关矩阵第i行第j列的元素是原矩阵第i列和第j列的相关系数
       val corrMatrix: Matrix = Statistics.corr(data, "pearson")
       println(corrMatrix.toString)
     }

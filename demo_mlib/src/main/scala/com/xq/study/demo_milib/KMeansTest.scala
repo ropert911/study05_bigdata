@@ -52,22 +52,24 @@ object KMeansTest {
 
     val buffer = new ListBuffer[String]
     val random = new Random()
-    for (index <- 1 to 1000) {
-      val range = if (index >= 990) random.nextInt(15) else random.nextInt(2) + 1
-      val times = if (index >= 990) random.nextInt(20) + 20 else random.nextInt(3) + 20
+    for (index <- 1 to 10000) {
+      val range = if (index >= 9990) random.nextInt(15) else random.nextInt(2) + 1
+      val times = if (index >= 9990) random.nextInt(20) + 20 else random.nextInt(3) + 20
 
       val str = +range + "," + times
-      println(str)
+//      println(str)
       buffer += str
     }
+
+    buffer += "50,50"
 
     val data = sc.parallelize(buffer)
     val parseData = data.map(x => Vectors.dense(x.split(",").map(_.toDouble)))
     parseData.cache()
 
     //形成训练数据模型
-    val numClusters = 5 //分类数
-    val numIterations = 50 //迭代次数
+    val numClusters = 7 //分类数
+    val numIterations = 100 //迭代次数
     val clusters = KMeans.train(parseData, numClusters, numIterations)
 
 
@@ -87,11 +89,12 @@ object KMeansTest {
 
 
     //判定新数据是不是合理
-    println(clusters.predict(Vectors.dense(Array(/*8.5,*/ 35.2, 20))))
-    println(clusters.predict(Vectors.dense(Array(/*6.5,*/ 16.7, 10))))
-    println(clusters.predict(Vectors.dense(Array(/*26.5,*/ 49.6, 26))))
-    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 7))))
-    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 100))))
+//    println(clusters.predict(Vectors.dense(Array(/*8.5,*/ 35.2, 20))))
+//    println(clusters.predict(Vectors.dense(Array(/*6.5,*/ 16.7, 10))))
+//    println(clusters.predict(Vectors.dense(Array(/*26.5,*/ 49.6, 26))))
+//    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 7))))
+//    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 49.6, 100))))
+    println(clusters.predict(Vectors.dense(Array(/*35.5,*/ 50.0, 50))))
 
     parseData.unpersist()
   }

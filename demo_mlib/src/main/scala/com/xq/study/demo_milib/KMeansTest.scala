@@ -51,11 +51,12 @@ object KMeansTest {
 
   def do1(spark: SparkSession, sc: SparkContext): Unit = {
     val deviceType = "3001"
-    val modelPath = TrainInfoUtils.getTrainModelPath(deviceType)
+    val alarmType = "temperature"
+    val modelPath = TrainInfoUtils.getTrainModelPath(deviceType, alarmType)
     var clusters = loadModel(sc, modelPath)
-    var abNormalClusterIndex = TrainInfoUtils.getOtherInfo(sc, deviceType)
+    var abNormalClusterIndex = TrainInfoUtils.getOtherInfo(sc, deviceType, alarmType)
     if (null == clusters || -1 == abNormalClusterIndex) {
-      TrainInfoUtils.delTypeFolder(sc, deviceType)
+      TrainInfoUtils.delTypeFolder(sc, deviceType, alarmType)
       println("一个错误有进行重新生成==>重新生成数据模型+其它模型信息")
       val parseData = getTrainData(sc)
       parseData.cache()
@@ -83,7 +84,7 @@ object KMeansTest {
       val clusterNumber = clusters.predict(parseData).map(cluster => (cluster, 1)).reduceByKey(_ + _).collect()
       clusterNumber.foreach(println)
       abNormalClusterIndex = getAbNormalIndex(clusterNumber)
-      TrainInfoUtils.saveOtherInfo(sc, deviceType, abNormalClusterIndex)
+      TrainInfoUtils.saveOtherInfo(sc, deviceType, alarmType, abNormalClusterIndex)
 
       parseData.unpersist()
     }

@@ -13,37 +13,39 @@ import org.apache.spark.SparkContext
   */
 object TrainInfoUtils {
   val basePath = "C:\\Users\\sk-qianxiao\\Desktop\\data\\traininfo"
-  val typePathPatten = basePath + File.separator + "${deviceType}"
-  val timePathPatten = typePathPatten + File.separator + "${time}"
+  val deviceAlarmTypePathPatten = basePath + File.separator + "${deviceType}" + File.separator + "${alarmType}"
+  val timePathPatten = deviceAlarmTypePathPatten + File.separator + "${time}"
   val modelFolder = "model"
   val infoFileName = "info"
 
-  def getTypeFullPath(deviceType: String): String = {
-    val typeFullPath = typePathPatten.replaceAll("\\$\\{deviceType\\}", deviceType)
-    typeFullPath
+  def getDeviceAlarmTypeFullPath(deviceType: String, alarmType: String): String = {
+    var fullPath = deviceAlarmTypePathPatten.replaceAll("\\$\\{deviceType\\}", deviceType)
+    fullPath = fullPath.replaceAll("\\$\\{alarmType\\}", alarmType)
+    fullPath
   }
-  def getTimeFullPath(deviceType: String): String = {
+
+  def getTimeFullPath(deviceType: String, alarmType: String): String = {
     val sj = new SimpleDateFormat("yyyyMMddHH")
     val time = sj.format(Calendar.getInstance.getTime)
-    //    calendar.add(Calendar.DATE, -1)
 
-    var basePath = timePathPatten.replaceAll("\\$\\{deviceType\\}", deviceType)
-    basePath = basePath.replaceAll("\\$\\{time\\}", time)
-    basePath
+    var fullPath = timePathPatten.replaceAll("\\$\\{deviceType\\}", deviceType)
+    fullPath = fullPath.replaceAll("\\$\\{alarmType\\}", alarmType)
+    fullPath = fullPath.replaceAll("\\$\\{time\\}", time)
+    fullPath
   }
 
-  def getTrainModelPath(deviceType: String): String = {
-    val modelPath = getTimeFullPath(deviceType) + File.separator + modelFolder
+  def getTrainModelPath(deviceType: String, alarmType: String): String = {
+    val modelPath = getTimeFullPath(deviceType, alarmType) + File.separator + modelFolder
     modelPath
   }
 
-  def getOtherInfoPath(deviceType: String): String = {
-    val infoPath = getTimeFullPath(deviceType) + File.separator + infoFileName
+  def getOtherInfoPath(deviceType: String, alarmType: String): String = {
+    val infoPath = getTimeFullPath(deviceType, alarmType) + File.separator + infoFileName
     infoPath
   }
 
-  def getOtherInfo(sc: SparkContext, deviceType: String): Int = {
-    val infoPath = getOtherInfoPath(deviceType)
+  def getOtherInfo(sc: SparkContext, deviceType: String, alarmType: String): Int = {
+    val infoPath = getOtherInfoPath(deviceType, alarmType)
     val txtRdd = sc.textFile(infoPath)
     try {
       val index = txtRdd.first().toInt
@@ -55,15 +57,15 @@ object TrainInfoUtils {
     }
   }
 
-  def saveOtherInfo(sc: SparkContext, deviceType: String, abNormalClusterIndex: Int) = {
-    val infoPath = getOtherInfoPath(deviceType)
+  def saveOtherInfo(sc: SparkContext, deviceType: String, alarmType: String, abNormalClusterIndex: Int) = {
+    val infoPath = getOtherInfoPath(deviceType, alarmType)
     val array = Array(abNormalClusterIndex)
     val rdd = sc.parallelize(array)
     rdd.saveAsTextFile(infoPath)
   }
 
-  def delTypeFolder(sc: SparkContext, deviceType: String): Unit = {
-    val basePath = getTypeFullPath(deviceType)
+  def delTypeFolder(sc: SparkContext, deviceType: String, alarmType: String): Unit = {
+    val basePath = getDeviceAlarmTypeFullPath(deviceType, alarmType)
     val path = new Path(basePath)
     val fileSystem = FileSystem.get(sc.hadoopConfiguration)
     if (fileSystem.exists(path)) {

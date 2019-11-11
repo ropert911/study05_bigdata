@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory
   * @date 2019/10/23
   */
 object TF_IDF {
-  val logger = LoggerFactory.getLogger(t1.getClass)
+  val logger = LoggerFactory.getLogger(PipeLine.getClass)
   Logger.getLogger("org").setLevel(Level.WARN)
 
   def main(args: Array[String]) {

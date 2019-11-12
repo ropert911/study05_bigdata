@@ -1,5 +1,6 @@
-package com.xq.study.demo_milib
+package com.xq.study.demo_milib.ml
 
+import com.xq.study.demo_milib.聚类算法_KMeans
 import org.apache.spark.sql.SparkSession
 
 /**
@@ -9,7 +10,7 @@ import org.apache.spark.sql.SparkSession
 object KMeasTestMl {
   def main(args: Array[String]): Unit = {
     //设置spark参数
-    val spark = SparkSession.builder().appName(KMeansTest.getClass.getName).master("local[1]").getOrCreate()
+    val spark = SparkSession.builder().appName(聚类算法_KMeans.getClass.getName).master("local[1]").getOrCreate()
 
     do1(spark)
 

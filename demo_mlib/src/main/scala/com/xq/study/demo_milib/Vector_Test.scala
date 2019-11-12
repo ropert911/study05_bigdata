@@ -11,7 +11,7 @@ import org.apache.spark.sql.SparkSession
   */
 object Vector_Test {
   def main(args: Array[String]) {
-    val spark = SparkSession.builder().appName(KMeansTest.getClass.getName).master("local[1]").getOrCreate()
+    val spark = SparkSession.builder().appName(聚类算法_KMeans.getClass.getName).master("local[1]").getOrCreate()
     val sc = spark.sparkContext
 
     //    vectorTest(sc)

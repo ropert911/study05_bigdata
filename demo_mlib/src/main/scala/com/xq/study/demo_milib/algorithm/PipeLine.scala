@@ -1,6 +1,6 @@
 package com.xq.study.demo_milib.algorithm
 
-import com.xq.study.demo_milib.KMeansTest
+import com.xq.study.demo_milib.聚类算法_KMeans
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkContext
 import org.apache.spark.ml.classification.LogisticRegression
@@ -19,7 +19,7 @@ object PipeLine {
   Logger.getLogger("org").setLevel(Level.WARN)
 
   def main(args: Array[String]) {
-    val spark = SparkSession.builder().appName(KMeansTest.getClass.getName).master("local[1]").getOrCreate()
+    val spark = SparkSession.builder().appName(聚类算法_KMeans.getClass.getName).master("local[1]").getOrCreate()
     val sc = spark.sparkContext
     sc.setLogLevel("WARN")
 

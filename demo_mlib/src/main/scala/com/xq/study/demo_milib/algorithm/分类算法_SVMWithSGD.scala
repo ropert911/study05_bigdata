@@ -2,9 +2,11 @@ package com.xq.study.demo_milib.algorithm
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkContext
-import org.apache.spark.ml.feature.Word2Vec
+import org.apache.spark.mllib.classification.SVMWithSGD
+import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.sql.SparkSession
 import org.slf4j.LoggerFactory
+import org.apache.spark.mllib.regression.LabeledPoint
 
 /**
   * Word2vec是一个Estimator，它采用一系列代表文档的词语来训练word2vecmodel。该模型将每个词语映射到一个固定大小的向量。word2vecmodel使用文档中每个词语的平均数来将文档转换为向量，然后这个向量可以作为预测的特征，来计算文档相似度计算等等。
@@ -15,8 +17,8 @@ import org.slf4j.LoggerFactory
   * @author sk-qianxiao
   * @date 2019/11/11
   */
-object Word2Vec {
-  val logger = LoggerFactory.getLogger(Word2Vec.getClass)
+object 分类算法_SVMWithSGD {
+  val logger = LoggerFactory.getLogger(分类算法_SVMWithSGD.getClass)
   Logger.getLogger("org").setLevel(Level.WARN)
 
   def main(args: Array[String]) {
@@ -28,22 +30,27 @@ object Word2Vec {
   }
 
   def test(spark: SparkSession, sc: SparkContext): Unit = {
-    // Input data: Each row is a bag of words from a sentence or document.
-    val documentDF = spark.createDataFrame(Seq(
-      "Hi I heard about Spark".split(" "),
-      "I wish Java could use case classes".split(" "),
-      "Logistic regression models are neat".split(" ")
-    ).map(Tuple1.apply)).toDF("text")
-    documentDF.show()
+    // 加载和解析数据文件
+    val data = sc.textFile("C:\\Users\\sk-qianxiao\\Desktop\\sample_svm_data.txt")
+    val parsedData = data.map { line =>
+      val parts = line.split(' ')
+      LabeledPoint(parts(0).toDouble, Vectors.dense(parts.tail.map(x => x.toDouble)))
+    }
 
-    // Learn a mapping from words to Vectors.
-    val word2Vec = new Word2Vec()
-      .setInputCol("text")
-      .setOutputCol("result")
-      .setVectorSize(3)
-      .setMinCount(0)
-    val model = word2Vec.fit(documentDF)
-    val result = model.transform(documentDF)
-    result.select("text", "result").take(3).foreach(println)
+    /** 设置迭代次数并进行进行训练 */
+    val numIterations = 20
+    val model = SVMWithSGD.train(parsedData, numIterations)
+
+    /** 清除阈值，以便“predict”将输出原始预测分数 */
+//    model.clearThreshold()
+
+    /** 统计分类错误的样本比例 */
+    val labelAndPreds = parsedData.map { point =>
+      val prediction = model.predict(point.features)
+      (point.label, prediction)
+    }
+    labelAndPreds.foreach(item => println(item._1 + "  " + item._2))
+    val trainErr = labelAndPreds.filter(r => r._1 != r._2).count.toDouble / parsedData.count
+    println("Training Error = " + trainErr)
   }
 }

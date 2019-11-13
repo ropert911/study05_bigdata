@@ -38,23 +38,20 @@ object 分类算法_KNN {
       Array(12, "新步步惊心", 8, 34, 17, "爱情片"))
     // 求唐人街办案类型
     val movie = Array(13, "唐人街探案", 23, 3, 17, null);
-    val length = sample.length - 1;
     println("序号 名称        距离");
     var movieDisList = List[MovieDis]();
 
-    for (i <- 0 to length) {
-      val mv: Array[Any] = sample(i);
+    for (mv <- sample) {
       val distances: Double = getDistance(mv, movie);
       val movieDis = new MovieDis(mv(0).asInstanceOf[Int], mv(1).asInstanceOf[String], distances, mv(5).asInstanceOf[String]);
       println(printf("%s %s %s", mv(0), mv(1), distances));
-      //列表添加跟java不一样，坑
       movieDisList = (movieDisList.+:(movieDis))
     }
     movieDisList = movieDisList.sortWith((o1: MovieDis, o2: MovieDis) => (o1.distance < o2.distance));
 
-    var k: Int = 5;
+    val k = 5;
     println("按照欧式距离排序，取k=5");
-    movieDisList = movieDisList take 5;
+    movieDisList = movieDisList take k;
     movieDisList.foreach { o => println(o) }
   }
 

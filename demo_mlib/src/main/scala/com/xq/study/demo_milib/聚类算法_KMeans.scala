@@ -111,20 +111,4 @@ object 聚类算法_KMeans {
 
     clusterIndex
   }
-
-  def loadModel(sc: SparkContext, modelPath: String): KMeansModel = {
-    try {
-      val clusters = KMeansModel.load(sc, modelPath)
-      println("加载进来的数据模型===>")
-      val centers = clusters.clusterCenters.toList
-      for (index <- 0 until centers.size) {
-        println(index + "\t" + centers(index))
-      }
-      clusters
-    } catch {
-      case ex: Exception => {
-        null
-      }
-    }
-  }
 }

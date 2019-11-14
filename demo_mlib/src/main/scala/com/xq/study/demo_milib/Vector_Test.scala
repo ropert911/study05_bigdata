@@ -2,7 +2,6 @@ package com.xq.study.demo_milib
 
 import org.apache.spark.SparkContext
 import org.apache.spark.mllib.linalg.Vectors
-import org.apache.spark.mllib.stat.{MultivariateStatisticalSummary, Statistics}
 import org.apache.spark.sql.SparkSession
 
 /**

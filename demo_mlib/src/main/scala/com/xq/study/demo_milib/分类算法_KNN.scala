@@ -1,6 +1,7 @@
 package com.xq.study.demo_milib
 
 import com.xq.study.demo_milib.algorithm.TF_IDF
+import com.xq.study.demo_milib.model.MovieDis
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SparkSession

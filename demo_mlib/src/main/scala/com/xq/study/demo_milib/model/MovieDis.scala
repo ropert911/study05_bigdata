@@ -1,4 +1,4 @@
-package com.xq.study.demo_milib
+package com.xq.study.demo_milib.model
 
 /**
   * @author sk-qianxiao

@@ -8,6 +8,7 @@ import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.TableName;
 import org.apache.hadoop.hbase.client.*;
 
+import java.io.File;
 import java.io.IOException;
 
 
@@ -28,15 +29,18 @@ public class HBaseUtilsImpl implements HBaseUtils {
      * @return
      */
     public static Connection getConnection(String zkConnectValue) {
-        // 创建一个可以用来管理hbase配置信息的conf对象
-        Configuration conf = HBaseConfiguration.create();
-        // 设置当前的程序去寻找的hbase在哪里
-        conf.set(ZK_CONNECT_KEY, zkConnectValue);
-        //另外的方式就是指定hdfs_core,hdfs_site,hbase_site配置文件
-//        conf.addResource("/etc/hbase/conf/core-site.xml");
-//        conf.addResource("/etc/hbase/conf/hdfs-site.xml");
-//        conf.addResource("/etc/hbase/conf/hbase-site.xml");
         try {
+            // 创建一个可以用来管理hbase配置信息的conf对象
+//        Configuration conf = HBaseConfiguration.create();
+            // 设置当前的程序去寻找的hbase在哪里
+//        conf.set(ZK_CONNECT_KEY, zkConnectValue);
+
+
+            //另外的方式就是指定hdfs_core,hdfs_site,hbase_site配置文件
+            Configuration conf = HBaseConfiguration.create();
+            conf.addResource(new File("C:/Users/xq/Desktop/data/core-site.xml").toURI().toURL());
+            conf.addResource(new File("C:/Users/xq/Desktop/data/hdfs-site.xml").toURI().toURL());
+            conf.addResource(new File("C:/Users/xq/Desktop/data/hbase-site.xml").toURI().toURL());
             conn = ConnectionFactory.createConnection(conf);
         } catch (IOException e) {
             e.printStackTrace();
